@@ -1,4 +1,4 @@
-import os
+import os, time
 from PIL import Image
 # Pasta que será acessada
 input_folder = r"put your folder here"
@@ -8,6 +8,7 @@ output_folder = r"put your output folder here"
 height, width = 1920, 1080
 os.makedirs(output_folder, exist_ok=True)
 
+tic = time.perf_counter()
 for file in os.listdir(input_folder):
     if file.lower().endswith(".jpg"):
         in_path = os.path.join(input_folder, file)
@@ -16,5 +17,6 @@ for file in os.listdir(input_folder):
         img_resized = img.resize((width, height))
         img_resized.save(out_path, quality=95)
         print(f"Processando: {file}")
+toc = time.perf_counter()
 
-print("Todas as imagens foram redimensionadas com sucesso")
+print(f"Todas as imagens foram redimensionadas com sucesso em {toc - tic: 0.4f} segundos")
